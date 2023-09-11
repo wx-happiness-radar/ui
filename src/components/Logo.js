@@ -3,7 +3,7 @@ export default function Logo() {
   const source = "logo.svg";
   return (
     <>
-      <Image src={source} width={150} height={150} alt="The Xero Logo" />
+      <Image src={source} width={200} height={200} alt="The Xero Logo" />
     </>
   );
 }
