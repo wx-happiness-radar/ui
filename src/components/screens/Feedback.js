@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CenterContent from "./ContentGroup";
 import Header from "../Header";
+import { TertiaryButton, BackButtonInvert } from "../Button";
 
 export default function Feedback({ question }) {
   const [currentlySelectedSmileyName, setSelected] = useState(null);
@@ -51,7 +52,7 @@ export default function Feedback({ question }) {
     }
   }
 
-  const allSmileyNames = ["good", "neutral", "bad"];
+  const allSmileyNames = ["bad", "neutral", "good"];
   const smileys = allSmileyNames.map((smileyName) => (
     <Smiley
       key={smileyName}
@@ -63,21 +64,28 @@ export default function Feedback({ question }) {
 
   return (
     <CenterContent>
-      <div />
-
+      <div className="h-1/5">
+        <TertiaryButton>End Event</TertiaryButton>
+        <BackButtonInvert></BackButtonInvert>
+      </div>
       <div className="flex flex-col space-y-4">
         <Header color="text-white">{question}</Header>
-        <div className="w-full bg-white rounded p-2 sm:p-8 flex flex-row space-x-4 relative">
+        <div className="w-full bg-white rounded-3xl p-2 sm:p-8 flex flex-row space-x-4 relative">
           {smileys}
         </div>
         <Thanks visible={isShowingThanks} />
       </div>
 
       <div className="w-full flex flex-col items-center">
-        <img
-          src="additional-feedback-qr-code.svg"
-          className="max-w-[200px] rounded"
-        />
+        <div className="space-y-2">
+          <div className="text-white w-full text-center">
+            Provide more feedback
+          </div>
+          <img
+            src="additional-feedback-qr-code.svg"
+            className="max-w-[200px] rounded"
+          />
+        </div>
       </div>
     </CenterContent>
   );
@@ -92,7 +100,7 @@ function Smiley({ smileyName, onClick, currentlySelectedSmileyName }) {
         className={`flex-1 ${
           currentlySelectedSmileyName == smileyName
             ? "opacity-100 scale-125"
-            : "opacity-75 scale-100"
+            : "opacity-80 scale-100"
         }`}
         onClick={onClick}
       />
@@ -107,8 +115,8 @@ function Thanks({ visible }) {
         visible ? "opacity-100" : "opacity-0"
       }`}
     >
-      <div className="text-xs sm:text-xl text-white bg-sky-300 bg-opacity-50 rounded p-2">
-        Thanks for your feedback! 🎉
+      <div className="text-2xl text-white bg-sky-300 bg-opacity-50 rounded-full p-2">
+        🎉 Thanks for your feedback! 🎉
       </div>
     </div>
   );

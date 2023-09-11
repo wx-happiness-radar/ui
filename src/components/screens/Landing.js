@@ -8,14 +8,17 @@ export default function Landing({ nextScreen }) {
   return (
     <CenterContent>
       <div />
-      <div className="w-full flex flex-col sm:flex-row space-y-8 sm:space-y-0 sm:space-x-8 items-center justify-center">
+      <div className="w-full flex flex-col sm:flex-row space-y-8 sm:space-y-0 sm:space-x-8 items-center justify-center text-left">
         <Logo />
         <Header textCenter={true}>
           Happiness <br /> Radar
         </Header>
       </div>
-      <div id="bottom-buttons" className="w-full">
-        <PrimaryButton onClick={nextScreen}>Get started!</PrimaryButton>
+      <div id="bottom-buttons" className="w-9/12">
+        <PrimaryButton onClick={nextScreen}>Begin new event</PrimaryButton>
+        <SecondaryButton onClick={nextScreen}>
+          Resume last event
+        </SecondaryButton>
       </div>
     </CenterContent>
   );
