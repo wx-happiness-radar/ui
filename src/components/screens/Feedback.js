@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CenterContent from "./ContentGroup";
 import Header from "../Header";
+import { TertiaryButton, BackButtonInvert } from "../Button";
 
 export default function Feedback({ question }) {
   const [currentlySelectedSmileyName, setSelected] = useState(null);
