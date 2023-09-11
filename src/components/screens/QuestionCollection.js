@@ -18,12 +18,13 @@ export default function QuestionCollection({
       <BackButton onClick={previousScreen} />
       <div />
       <div className="space-y-4">
-        <span className={`text-3xl font-bold ${TEXT_XERO_NAVY}`}>
+        <div className={`text-center text-5xl font-bold ${TEXT_XERO_NAVY}`}>
           Question to be asked on this device:
-        </span>
+        </div>
+        <div className="py-4"></div>
         <input
           type="text"
-          className={`appearance-none ${BG_HIGHLIGHT_BLUE} focus:bg- border-b-2 ${BORDER_XERO_NAVY}  w-full  py-2 px-2 focus:outline-none`}
+          className={`appearance-none ${BG_HIGHLIGHT_BLUE} border-b-2 ${BORDER_XERO_NAVY}  w-full  py-2 px-2 focus:outline-none`}
           placeholder={question}
           onChange={(e) => {
             setQuestion(e.target.value);
