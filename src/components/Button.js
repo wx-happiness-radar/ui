@@ -5,7 +5,7 @@ import Image from "next/image";
 export function PrimaryButton({ children, onClick }) {
   return (
     <div
-      className={`rounded ${BG_XERO_NAVY} text-white font-semibold w-full text-center py-2 px-4`}
+      className={`rounded ${BG_XERO_NAVY} text-white font-bold w-full text-center py-4 px-4`}
       onClick={onClick}
     >
       {children}
@@ -17,7 +17,7 @@ export function SecondaryButton({ children, onClick }) {
   // Currently unused, but was in Figma
   return (
     <div
-      className={`rounded ${TEXT_XERO_NAVY} font-semibold w-full text-sm text-center py-2 px-4`}
+      className={`rounded ${TEXT_XERO_NAVY} font-bold w-full text-sm text-center py-2 px-4`}
       onClick={onClick}
     >
       {children}
@@ -26,10 +26,9 @@ export function SecondaryButton({ children, onClick }) {
 }
 
 export function TertiaryButton({ children, onClick }) {
-  // Currently unused, but was in Figma
   return (
     <div
-      className={`rounded  bg-white ${TEXT_XERO_NAVY} text-xs font-semibold text-center py-1 px-2`}
+      className={`rounded fixed bg-white ${TEXT_XERO_NAVY} text-s font-semibold text-center py-1 px-3 top-5 right-5`}
       onClick={onClick}
     >
       {children}
@@ -40,10 +39,21 @@ export function TertiaryButton({ children, onClick }) {
 export function BackButton({ onClick }) {
   return (
     <div
-      className={`rounded absolute top-0 left-0 ${TEXT_XERO_NAVY} text-xs font-semibold text-center`}
+      className={`rounded fixed top-5 left-5 text-xs font-semibold text-center`}
       onClick={onClick}
     >
-      <Image src="back-arrow.svg" alt="back arrow" width={40} height={40} />
+      <Image src="/back-arrow.svg" alt="back arrow" width={35} height={35} />
+    </div>
+  );
+}
+
+export function BackButtonInvert({ onClick }) {
+  return (
+    <div
+      className={`rounded fixed top-5 left-5 text-xs font-semibold text-center`}
+      onClick={onClick}
+    >
+      <Image src="/back-arrow-invert.svg" alt="back arrow" width={35} height={35} />
     </div>
   );
 }
