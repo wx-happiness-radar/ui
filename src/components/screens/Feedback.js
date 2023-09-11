@@ -3,7 +3,7 @@ import CenterContent from "./ContentGroup";
 import Header from "../Header";
 import { TertiaryButton, BackButtonInvert } from "../Button";
 
-export default function Feedback({ question }) {
+export default function Feedback({ question, previousScreen }) {
   const [currentlySelectedSmileyName, setSelected] = useState(null);
   const [isShowingThanks, setIsShowingThanks] = useState(false);
   const [latitude, setLatitude] = useState(null);
@@ -65,8 +65,7 @@ export default function Feedback({ question }) {
   return (
     <CenterContent>
       <div className="h-1/5">
-        <TertiaryButton>End Event</TertiaryButton>
-        <BackButtonInvert></BackButtonInvert>
+        <BackButtonInvert onClick={previousScreen}></BackButtonInvert>
       </div>
       <div className="flex flex-col space-y-4">
         <Header color="text-white">{question}</Header>
