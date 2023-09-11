@@ -8,7 +8,7 @@ import Background from "../components/background/Background";
 export default function App() {
   const [screenIndex, setScreenIndex] = useState(0);
   const [backgroundColor, setBackgroundColor] = useState(BG_HIGHLIGHT_BLUE);
-  const defaultQuestion = "How are you finding this social?";
+  const defaultQuestion = "How do you feel about today's event?";
   const [question, setQuestion] = useState(defaultQuestion);
   useEffect(updateBackgroundColor, [screenIndex]);
 
