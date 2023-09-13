@@ -42,7 +42,7 @@ export function BackButton({ onClick }) {
       className={`rounded fixed top-5 left-5 text-xs font-semibold text-center`}
       onClick={onClick}
     >
-      <Image src="/back-arrow.svg" alt="back arrow" width={35} height={35} />
+      <Image src="back-arrow.svg" alt="back arrow" width={35} height={35} />
     </div>
   );
 }
@@ -53,7 +53,12 @@ export function BackButtonInvert({ onClick }) {
       className={`rounded fixed top-5 left-5 text-xs font-semibold text-center`}
       onClick={onClick}
     >
-      <Image src="/back-arrow-invert.svg" alt="back arrow" width={35} height={35} />
+      <Image
+        src="back-arrow-invert.svg"
+        alt="back arrow"
+        width={35}
+        height={35}
+      />
     </div>
   );
 }
