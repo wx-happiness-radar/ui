@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import CenterContent from "./ContentGroup";
 import Header from "../Header";
-import { BackButtonInvert } from "../Button";
+import { BackButtonInvert, BadOptionButton } from "../Button";
 
 export default function Feedback({ question, previousScreen }) {
-  const [currentlySelectedSmileyName, setSelected] = useState(null);
+  const [selectedSmileyName, setSelectedSmileyName] = useState(null);
+  const badReasonWhenNotProvided = "No reason provided";
+  const [selectedBadReason, setSelectedBadReason] = useState(
+    badReasonWhenNotProvided
+  );
+  const [isShowingBadReasonOptions, setIsShowingBadReasonOptions] =
+    useState(false);
   const [isShowingThanks, setIsShowingThanks] = useState(false);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-
-  console.log("rerender Feedback");
-  console.log("selected", currentlySelectedSmileyName);
 
   useEffect(() => {
     // Get the user's location when the component mounts
@@ -31,25 +34,57 @@ export default function Feedback({ question, previousScreen }) {
     getLocation();
   }, []); // Empty dependency array ensures this effect runs once on mount
 
-  async function submitFeedback(question, smileyName, lat, long) {
+  async function submitFeedback(
+    question,
+    smileyName,
+    selectedBadReason,
+    lat,
+    long
+  ) {
+    console.log(selectedBadReason);
+    // TODO: update form to accept selectedBadReason
     const url = `https://docs.google.com/forms/d/e/1FAIpQLSeKBFCPZOkzMRtOudAK-91NzKm8OiAnnlnQDC8zNMJ-oJqSFw/formResponse?&submit=Submit&entry.881971892=${question}&entry.851806253=${smileyName}&entry.200176182=${lat}&entry.653180322=${long}`;
     await fetch(url, { mode: "no-cors" });
   }
 
-  function smileyClickHandler(smileyName) {
-    if (currentlySelectedSmileyName != null) {
+  async function getBadReason() {
+    await setIsShowingBadReasonOptions(true);
+    console.log("showing bad reason options");
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+    console.log("hiding bad reason options");
+    setIsShowingBadReasonOptions(false);
+  }
+
+  async function smileyClickHandler(smileyName) {
+    if (selectedSmileyName != null) {
       return; // only submit one smiley at a time
     } else {
-      setSelected(smileyName);
-      submitFeedback(question, smileyName, latitude, longitude);
+      setSelectedSmileyName(smileyName);
+
+      if (smileyName == "bad") {
+        await getBadReason();
+      }
+
+      submitFeedback(
+        question,
+        smileyName,
+        selectedBadReason,
+        latitude,
+        longitude
+      );
       setIsShowingThanks(true);
-      // short delay
+      // short delay to read the thank-you message
       setTimeout(() => {
-        console.log("in timeout");
-        setSelected(null);
-        setIsShowingThanks(false);
+        resetFeedback();
       }, 1000);
     }
+  }
+
+  function resetFeedback() {
+    // reset the page for the next response
+    setSelectedSmileyName(null);
+    setSelectedBadReason(badReasonWhenNotProvided);
+    setIsShowingThanks(false);
   }
 
   const allSmileyNames = ["bad", "neutral", "good"];
@@ -57,7 +92,7 @@ export default function Feedback({ question, previousScreen }) {
     <Smiley
       key={smileyName}
       smileyName={smileyName}
-      currentlySelectedSmileyName={currentlySelectedSmileyName}
+      currentlySelectedSmileyName={selectedSmileyName}
       onClick={() => smileyClickHandler(smileyName, allSmileyNames)}
     />
   ));
@@ -72,7 +107,14 @@ export default function Feedback({ question, previousScreen }) {
         <div className="w-full bg-white rounded-3xl p-2 sm:p-8 flex flex-row space-x-4 relative">
           {smileys}
         </div>
-        <Thanks visible={isShowingThanks} />
+        <div className="h-16">
+          <BadReasonOptions
+            visible={isShowingBadReasonOptions}
+            selectedBadReason={selectedBadReason}
+            setSelectedBadReason={setSelectedBadReason}
+          />
+          <Thanks visible={isShowingThanks} />
+        </div>
       </div>
 
       <div className="w-full flex flex-col items-center">
@@ -107,16 +149,53 @@ function Smiley({ smileyName, onClick, currentlySelectedSmileyName }) {
   );
 }
 
+function BadReasonOptions({
+  visible,
+  selectedBadReason,
+  setSelectedBadReason,
+}) {
+  const badReasonOptions = [
+    "Overcrowded atmosphere",
+    "Disliked food options provided",
+    "Not enough dietary catering",
+    "Music didn't match my vibe",
+  ];
+
+  return (
+    <div
+      className={`relative flex flex-row justify-center w-full h-full ${
+        !visible && "hidden"
+      }
+     flex flex-row space-x-4 rounded-full`}
+    >
+      {badReasonOptions.map((badReasonOption) => (
+        <BadOptionButton
+          key={badReasonOption} // Don't forget to add a unique key when mapping over an array
+          selectedBadReason={selectedBadReason}
+          onClick={() => {
+            setSelectedBadReason(badReasonOption);
+          }}
+        >
+          {badReasonOption}
+        </BadOptionButton>
+      ))}
+    </div>
+  );
+}
+
 function Thanks({ visible }) {
   return (
     <div
-      className={`relative flex flex-row justify-center w-full ${
-        visible ? "opacity-100" : "opacity-0"
+      className={`relative flex flex-row justify-center w-full h-full ${
+        !visible && "hidden"
       }`}
     >
-      <div className="text-2xl text-white bg-sky-300 bg-opacity-50 rounded-full p-2">
-        🎉 Thanks for your feedback! 🎉
+      <div className="bg-sky-300 bg-opacity-50 rounded-full px-3 py-1 flex items-center justify-center">
+        <div className="text-2xl text-white">
+          🎉 Thanks for your feedback! 🎉
+        </div>
       </div>
     </div>
   );
 }
+

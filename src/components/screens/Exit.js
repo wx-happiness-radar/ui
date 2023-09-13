@@ -1,6 +1,6 @@
 import React from "react";
 import ContentGroup from "./ContentGroup";
-import { TertiaryButton } from "../Button";
+import { BadOptionButton } from "../Button";
 import Header from "../Header";
 import { TEXT_XERO_NAVY } from "../../colors";
 
@@ -14,7 +14,9 @@ export default function Exit({ previousScreen }) {
           Check out the results on Google Drive!
         </span>
         <div>
-          <TertiaryButton onClick={previousScreen}>Take Me Back</TertiaryButton>
+          <BadOptionButton onClick={previousScreen}>
+            Take Me Back
+          </BadOptionButton>
         </div>
       </div>
       <div></div>

@@ -1,7 +1,7 @@
 import React from "react";
 import CenterContent from "./ContentGroup";
 import Logo from "../Logo";
-import { PrimaryButton, SecondaryButton } from "../Button";
+import { PrimaryButton } from "../Button";
 import Header from "../Header";
 
 export default function Landing({ nextScreen }) {

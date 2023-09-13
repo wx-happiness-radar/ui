@@ -1,5 +1,5 @@
 import React from "react";
-import { BG_XERO_NAVY, TEXT_XERO_NAVY } from "../colors";
+import { BG_XERO_NAVY, TEXT_XERO_NAVY, TEXT_WHITE } from "../colors";
 import Image from "next/image";
 
 export function PrimaryButton({ children, onClick }) {
@@ -25,13 +25,17 @@ export function SecondaryButton({ children, onClick }) {
   );
 }
 
-export function TertiaryButton({ children, onClick }) {
+export function BadOptionButton({ children, selectedBadReason, onClick }) {
   return (
     <div
-      className={`rounded fixed bg-white ${TEXT_XERO_NAVY} text-s font-semibold text-center py-1 px-3 top-5 right-5`}
+      className={`rounded  ${
+        selectedBadReason == children
+          ? `${BG_XERO_NAVY} ${TEXT_WHITE}`
+          : `bg-white ${TEXT_XERO_NAVY}`
+      } flex items-center justify-center`}
       onClick={onClick}
     >
-      {children}
+      <div className="text-xs text-center py-1 px-3">{children}</div>
     </div>
   );
 }
