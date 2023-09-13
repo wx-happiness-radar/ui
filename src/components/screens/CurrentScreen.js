@@ -1,5 +1,4 @@
 import LandingScreen from "./Landing";
-import QuestionCollection from "./QuestionCollection";
 import Feedback from "./Feedback";
 import Exit from "./Exit";
 
@@ -8,18 +7,15 @@ export default function CurrentScreen({
   nextScreen,
   previousScreen,
   question,
-  setQuestion,
 }) {
   var screens = [
     <LandingScreen key="landing" nextScreen={nextScreen} />,
-    <QuestionCollection
-      key="question"
-      question={question}
-      setQuestion={setQuestion}
-      previousScreen={previousScreen}
+    <Feedback
+      key="feedback"
       nextScreen={nextScreen}
+      question={question}
+      previousScreen={previousScreen}
     />,
-    <Feedback key="feedback" nextScreen={nextScreen} question={question} previousScreen={previousScreen} />,
     <Exit key="exit" nextScreen={nextScreen} />,
   ];
   var component = screens[screenIndex];

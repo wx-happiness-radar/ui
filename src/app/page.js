@@ -8,8 +8,7 @@ import Background from "../components/background/Background";
 export default function App() {
   const [screenIndex, setScreenIndex] = useState(0);
   const [backgroundColor, setBackgroundColor] = useState(BG_HIGHLIGHT_BLUE);
-  const defaultQuestion = "How do you feel about today's event?";
-  const [question, setQuestion] = useState(defaultQuestion);
+  const question = "How do you feel about this experience hosted by WX today?";
   useEffect(updateBackgroundColor, [screenIndex]);
 
   function nextScreen() {
@@ -22,7 +21,7 @@ export default function App() {
   }
 
   function updateBackgroundColor() {
-    if (screenIndex === 2) {
+    if (screenIndex === 1) {
       setBackgroundColor(BG_XUI_BLUE);
     } else {
       setBackgroundColor(BG_HIGHLIGHT_BLUE);
@@ -36,7 +35,6 @@ export default function App() {
           screenIndex={screenIndex}
           backgroundColor={backgroundColor}
           question={question}
-          setQuestion={setQuestion}
           nextScreen={nextScreen}
           previousScreen={previousScreen}
         />
