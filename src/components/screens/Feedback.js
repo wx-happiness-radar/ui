@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CenterContent from "./ContentGroup";
 import Header from "../Header";
-import { TertiaryButton, BackButtonInvert } from "../Button";
+import { BackButtonInvert } from "../Button";
 
 export default function Feedback({ question, previousScreen }) {
   const [currentlySelectedSmileyName, setSelected] = useState(null);
@@ -48,7 +48,7 @@ export default function Feedback({ question, previousScreen }) {
         console.log("in timeout");
         setSelected(null);
         setIsShowingThanks(false);
-      }, 2000);
+      }, 1000);
     }
   }
 
