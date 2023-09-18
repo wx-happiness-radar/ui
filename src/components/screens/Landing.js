@@ -15,7 +15,7 @@ export default function Landing({ nextScreen }) {
         </Header>
       </div>
       <div id="bottom-buttons" className="w-9/12">
-        <PrimaryButton onClick={nextScreen}>Choose question</PrimaryButton>
+        <PrimaryButton onClick={nextScreen}>Get Started</PrimaryButton>
       </div>
     </CenterContent>
   );
