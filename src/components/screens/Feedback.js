@@ -37,15 +37,27 @@ export default function Feedback({ question, previousScreen }) {
     lat,
     long
   ) {
+    function getCurrentDate() {
+      const today = new Date();
+
+      const dd = String(today.getDate()).padStart(2, "0"); // Get the day and pad with leading zero if necessary
+      const mm = String(today.getMonth() + 1).padStart(2, "0"); // Get the month (add 1 because months are zero-based) and pad with leading zero if necessary
+      const yyyy = today.getFullYear(); // Get the full year
+
+      return dd + "/" + mm + "/" + yyyy; // Format the date as dd/mm/yyyy
+    }
+
+    const formattedDate = getCurrentDate();
     console.log(
       "Submitting:",
+      formattedDate,
       question,
       smileyName,
       selectedBadReason,
       lat,
       long
     );
-    var url = `https://docs.google.com/forms/d/e/1FAIpQLSeKBFCPZOkzMRtOudAK-91NzKm8OiAnnlnQDC8zNMJ-oJqSFw/formResponse?&submit=Submit&entry.881971892=${question}&entry.851806253=${smileyName}&entry.200176182=${lat}&entry.653180322=${long}&entry.1608401455=${selectedBadReason}`;
+    var url = `https://docs.google.com/forms/d/e/1FAIpQLSeKBFCPZOkzMRtOudAK-91NzKm8OiAnnlnQDC8zNMJ-oJqSFw/formResponse?&submit=Submit&entry.881971892=${question}&entry.851806253=${smileyName}&entry.200176182=${lat}&entry.653180322=${long}&entry.1608401455=${selectedBadReason}&entry.1379176844=${formattedDate}`;
     await fetch(url, { mode: "no-cors" });
 
     setIsShowingThanks(true);
