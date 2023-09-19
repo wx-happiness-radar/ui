@@ -45,10 +45,7 @@ export default function Feedback({ question, previousScreen }) {
       lat,
       long
     );
-    var url = `https://docs.google.com/forms/d/e/1FAIpQLSeKBFCPZOkzMRtOudAK-91NzKm8OiAnnlnQDC8zNMJ-oJqSFw/formResponse?&submit=Submit&entry.881971892=${question}&entry.851806253=${smileyName}&entry.200176182=${lat}&entry.653180322=${long}`;
-    if (smileyName == "bad") {
-      url = url + `&entry.1608401455=${selectedBadReason}`; // add bad reason to url, only if bad smiley was selected
-    }
+    var url = `https://docs.google.com/forms/d/e/1FAIpQLSeKBFCPZOkzMRtOudAK-91NzKm8OiAnnlnQDC8zNMJ-oJqSFw/formResponse?&submit=Submit&entry.881971892=${question}&entry.851806253=${smileyName}&entry.200176182=${lat}&entry.653180322=${long}&entry.1608401455=${selectedBadReason}`;
     await fetch(url, { mode: "no-cors" });
 
     setIsShowingThanks(true);
@@ -73,7 +70,7 @@ export default function Feedback({ question, previousScreen }) {
       if (smileyName == "bad") {
         setIsShowingBadReasonOptions(true);
       } else {
-        submitFeedback(question, smileyName, null, latitude, longitude);
+        submitFeedback(question, smileyName, "N/A", latitude, longitude);
       }
     }
   }
