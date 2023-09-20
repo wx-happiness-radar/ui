@@ -96,6 +96,14 @@ export default function Feedback({ question, previousScreen }) {
       "Other",
     ];
 
+    const [autoSubmit, setAutoSubmit] = React.useState(true);
+    if (visible) {
+      setTimeout(() => {
+        if (autoSubmit) {
+          onClick("N/A");
+        }
+      }, 10000); // Submit as if the user has clicked an "N/A" button after 10 seconds.
+    }
     function onClick(badReasonOption) {
       submitFeedback(question, "bad", badReasonOption, latitude, longitude);
       setIsShowingBadReasonOptions(false);
