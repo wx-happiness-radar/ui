@@ -93,6 +93,7 @@ export default function Feedback({ question, previousScreen }) {
       "Disliked food options provided",
       "Not enough dietary catering",
       "Music didn't match my vibe",
+      "Other",
     ];
 
     function onClick(badReasonOption) {
