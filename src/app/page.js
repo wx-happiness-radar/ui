@@ -8,7 +8,7 @@ import Background from "../components/background/Background";
 export default function App() {
   const [screenIndex, setScreenIndex] = useState(0);
   const [backgroundColor, setBackgroundColor] = useState(BG_HIGHLIGHT_BLUE);
-  const question = "How do you feel about this experience hosted by WX today?";
+  const question = "How was your experience at today's event?";
   useEffect(updateBackgroundColor, [screenIndex]);
 
   function nextScreen() {
