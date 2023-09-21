@@ -81,7 +81,7 @@ export default function Feedback({ question, previousScreen }) {
     } else {
       setSelectedSmileyName(smileyName);
 
-      if (smileyName == "bad") {
+      if (smileyName == "frown") {
         setIsShowingBadReasonOptions(true);
       } else {
         submitFeedback(question, smileyName, "N/A", latitude, longitude);
@@ -104,13 +104,13 @@ export default function Feedback({ question, previousScreen }) {
     }
 
     function noResponse() {
-      submitFeedback(question, "bad", "No Response", latitude, longitude);
+      submitFeedback(question, "frown", "No Response", latitude, longitude);
       setIsShowingBadReasonOptions(false);
     }
 
     function onClick(badReasonOption) {
       clearTimeout(autoSubmit); // Cancel the no response submission
-      submitFeedback(question, "bad", badReasonOption, latitude, longitude);
+      submitFeedback(question, "frown", badReasonOption, latitude, longitude);
       setIsShowingBadReasonOptions(false);
     }
 
@@ -133,7 +133,7 @@ export default function Feedback({ question, previousScreen }) {
     );
   }
 
-  const allSmileyNames = ["bad", "neutral", "good"];
+  const allSmileyNames = ["frown", "neutral", "smile"];
   const smileys = allSmileyNames.map((smileyName) => (
     <Smiley
       key={smileyName}
