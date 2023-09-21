@@ -96,15 +96,18 @@ export default function Feedback({ question, previousScreen }) {
       "Other",
     ];
 
-    const [autoSubmit, setAutoSubmit] = React.useState(true);
     if (visible) {
-      setTimeout(() => {
-        if (autoSubmit) {
-          onClick("N/A");
-        }
-      }, 10000); // Submit as if the user has clicked an "N/A" button after 10 seconds.
+      // Automatically submit no response if option not selected.
+      var autoSubmit = setTimeout(noResponse, 10000);
     }
+
+    function noResponse() {
+      submitFeedback(question, "bad", "No Response", latitude, longitude);
+      setIsShowingBadReasonOptions(false);
+    }
+
     function onClick(badReasonOption) {
+      clearTimeout(autoSubmit); // Cancel the no response submission
       submitFeedback(question, "bad", badReasonOption, latitude, longitude);
       setIsShowingBadReasonOptions(false);
     }
