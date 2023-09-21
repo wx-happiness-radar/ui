@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import CenterContent from "./ContentGroup";
 import Header from "../Header";
-import { BackButtonInvert, BadOptionButton } from "../Button";
+import { BackButtonInvert, BadOptionButton, PrimaryButton } from "../Button";
 
 export default function Feedback({ question, previousScreen }) {
   const [selectedSmileyName, setSelectedSmileyName] = useState(null);
   const [isShowingBadReasonOptions, setIsShowingBadReasonOptions] =
     useState(false);
   const [isShowingThanks, setIsShowingThanks] = useState(false);
+  const [isShowingLocationError, setIsShowingLocationError] = useState(false);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
 
@@ -23,6 +24,7 @@ export default function Feedback({ question, previousScreen }) {
         setLatitude(latitude); // Save latitude to state
         setLongitude(longitude); // Save longitude to state
       } catch (error) {
+        setIsShowingLocationError(true);
         console.error("Error getting user location:", error);
       }
     };
@@ -143,31 +145,55 @@ export default function Feedback({ question, previousScreen }) {
 
   return (
     <CenterContent>
-      <div className="h-1/5">
-        <BackButtonInvert onClick={previousScreen}></BackButtonInvert>
-      </div>
-      <div className="flex flex-col space-y-4">
-        <Header color="text-white">{question}</Header>
-        <div className="w-full bg-white rounded-3xl p-2 sm:p-8 flex flex-row space-x-4 relative">
-          {smileys}
-        </div>
-        <div className="h-16">
-          <BadReasonOptions visible={isShowingBadReasonOptions} />
-          <Thanks visible={isShowingThanks} />
-        </div>
-      </div>
-
-      <div className="w-full flex flex-col items-center">
-        <div className="space-y-2">
-          <div className="text-white w-full text-center">
-            Provide more feedback
+      {isShowingLocationError ? (
+        <div className="h-full w-full flex flex-col justify-center">
+          <div className="w-full h-fit  bg-white rounded-3xl p-2 sm:p-8 flex flex-col space-y-4 relative">
+            <Header color="text-black">
+              There was an error accessing the device location.
+            </Header>
+            <span className="text-center">
+              Please enable location services in the device settings, and in the
+              browser, then refresh the page.
+            </span>
+            <PrimaryButton
+              onClick={() => {
+                location.reload();
+              }}
+            >
+              Reload Page
+            </PrimaryButton>
           </div>
-          <img
-            src="additional-feedback-qr-code.svg"
-            className="max-w-[200px] rounded"
-          />
         </div>
-      </div>
+      ) : (
+        <>
+          <div className="h-1/5">
+            <BackButtonInvert onClick={previousScreen}></BackButtonInvert>
+          </div>
+
+          <div className="flex flex-col space-y-4">
+            <Header color="text-white">{question}</Header>
+            <div className="w-full bg-white rounded-3xl p-2 sm:p-8 flex flex-row space-x-4 relative">
+              {smileys}
+            </div>
+            <div className="h-16">
+              <BadReasonOptions visible={isShowingBadReasonOptions} />
+              <Thanks visible={isShowingThanks} />
+            </div>
+          </div>
+
+          <div className="w-full flex flex-col items-center">
+            <div className="space-y-2">
+              <div className="text-white w-full text-center">
+                Provide more feedback
+              </div>
+              <img
+                src="additional-feedback-qr-code.svg"
+                className="max-w-[200px] rounded"
+              />
+            </div>
+          </div>
+        </>
+      )}
     </CenterContent>
   );
 }
