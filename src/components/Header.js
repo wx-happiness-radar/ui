@@ -8,7 +8,7 @@ export default function Header({
 }) {
   return (
     <h1
-      className={`sm:text-3xl font-bold ${color} ${
+      className={`text-3xl font-bold ${color} ${
         textCenter ? "text-center" : "text-left"
       }`}
     >

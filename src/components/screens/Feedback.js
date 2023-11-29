@@ -166,7 +166,7 @@ export default function Feedback({ question, previousScreen }) {
         </div>
       ) : (
         <>
-          <div className="h-1/5">
+          <div className="">
             <BackButtonInvert onClick={previousScreen}></BackButtonInvert>
           </div>
 
