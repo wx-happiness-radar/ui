@@ -119,7 +119,7 @@ export default function Feedback({ question, previousScreen }) {
     }
 
     return (
-      <div className={`${!visible && "hidden"}`}>
+      <div className={`${!visible && "opacity-0"}`}>
         <div
           className={`relative flex flex-row w-full h-full space-x-2 sm:space-x-4`}
         >
