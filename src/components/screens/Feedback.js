@@ -91,11 +91,11 @@ export default function Feedback({ question, previousScreen }) {
 
   function BadReasonOptions({ visible }) {
     const badReasonOptions = [
-      "Crowded",
-      "Music",
-      "Low Energy",
-      "Dietary Options",
-      "Food",
+      "Overcrowded atmosphere",
+      "Disliked food options provided",
+      "Not enough dietary catering",
+      "Music didn't match my vibe",
+      "Other",
     ];
 
     if (visible) {
@@ -109,39 +109,26 @@ export default function Feedback({ question, previousScreen }) {
     }
 
     function onClick(badReasonOption) {
-      clearTimeout(autoSubmit); // Cancel the 'other' response submission
-      if (!(badReasonOption == "Cancel")) {
-        submitFeedback(question, "frown", badReasonOption, latitude, longitude);
-      } else {
-        resetFeedback();
-      }
+      clearTimeout(autoSubmit); // Cancel the no response submission
+      submitFeedback(question, "frown", badReasonOption, latitude, longitude);
       setIsShowingBadReasonOptions(false);
     }
 
     return (
-      <div className={`${!visible && "hidden"}`}>
-        <div
-          className={`relative flex flex-row w-full h-full space-x-2 sm:space-x-4`}
-        >
-          {badReasonOptions.map((badReasonOption) => (
-            <BadOptionButton
-              key={badReasonOption}
-              onClick={() => {
-                onClick(badReasonOption);
-              }}
-            >
-              {badReasonOption}
-            </BadOptionButton>
-          ))}
-        </div>
-        <div className="flex flex-row w-full justify-center p-4">
-          <div
-            className="text-white underline opacity-80"
-            onClick={() => onClick("Cancel")}
+      <div
+        className={`relative flex flex-row justify-center w-full h-full ${
+          !visible && "hidden"
+        }
+       flex flex-row space-x-4 rounded-full`}
+      >
+        {badReasonOptions.map((badReasonOption) => (
+          <BadOptionButton
+            key={badReasonOption} // Don't forget to add a unique key when mapping over an array
+            onClick={() => onClick(badReasonOption)}
           >
-            Cancel
-          </div>
-        </div>
+            {badReasonOption}
+          </BadOptionButton>
+        ))}
       </div>
     );
   }
@@ -188,7 +175,7 @@ export default function Feedback({ question, previousScreen }) {
             <div className="w-full bg-white rounded-3xl p-2 sm:p-8 flex flex-row space-x-4 relative">
               {smileys}
             </div>
-            <div className="">
+            <div className="h-16">
               <BadReasonOptions visible={isShowingBadReasonOptions} />
               <Thanks visible={isShowingThanks} />
             </div>
