@@ -117,7 +117,7 @@ export default function Feedback({ question, previousScreen }) {
     return (
       <div
         className={`relative flex flex-row justify-center w-full h-full ${
-          !visible && "hidden"
+          !visible && "opacity-0"
         }
        flex flex-row space-x-4 rounded-full`}
       >
