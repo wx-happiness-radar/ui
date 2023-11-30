@@ -115,16 +115,25 @@ export default function Feedback({ question, previousScreen }) {
     }
 
     return (
-      <div
-        className={`relative flex flex-row justify-center w-full h-full ${
-          !visible && "opacity-0"
-        }
-       flex flex-row space-x-4 rounded-full`}
-      >
-        {badReasonOptions.map((badReasonOption) => (
-          <BadOptionButton
-            key={badReasonOption} // Don't forget to add a unique key when mapping over an array
-            onClick={() => onClick(badReasonOption)}
+      <div className={`${!visible && "opacity-0"}`}>
+        <div
+          className={`relative flex flex-row w-full h-full space-x-2 sm:space-x-4`}
+        >
+          {badReasonOptions.map((badReasonOption) => (
+            <BadOptionButton
+              key={badReasonOption}
+              onClick={() => {
+                onClick(badReasonOption);
+              }}
+            >
+              {badReasonOption}
+            </BadOptionButton>
+          ))}
+        </div>
+        <div className="flex flex-row w-full justify-center p-4">
+          <div
+            className="text-white underline opacity-80"
+            onClick={() => onClick("Cancel")}
           >
             {badReasonOption}
           </BadOptionButton>
@@ -218,12 +227,12 @@ function Smiley({ smileyName, onClick, currentlySelectedSmileyName }) {
 function Thanks({ visible }) {
   return (
     <div
-      className={`relative flex flex-row justify-center w-full h-full ${
+      className={`relative flex flex-row justify-center ${
         !visible && "hidden"
       }`}
     >
       <div className="bg-sky-300 bg-opacity-50 rounded-full px-3 py-1 flex items-center justify-center">
-        <div className="text-2xl text-white">
+        <div className="text-2xl text-white flex-shrink">
           🎉 Thanks for your feedback! 🎉
         </div>
       </div>

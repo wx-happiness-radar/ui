@@ -35,7 +35,9 @@ export function BadOptionButton({ children, selectedBadReason, onClick }) {
       } flex items-center justify-center`}
       onClick={onClick}
     >
-      <div className="text-xs text-center py-1 px-3">{children}</div>
+      <div className="text-xs sm:text-xl text-center py-2 px-2 ">
+        {children}
+      </div>
     </div>
   );
 }
