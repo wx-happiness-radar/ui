@@ -28,7 +28,7 @@ export function SecondaryButton({ children, onClick }) {
 export function BadOptionButton({ children, selectedBadReason, onClick }) {
   return (
     <div
-      className={`rounded-3xl w-full  ${
+      className={`rounded-xl sm:rounded-3xl grow w-1/5  ${
         selectedBadReason == children
           ? `${BG_XERO_NAVY} ${TEXT_WHITE}`
           : `bg-white ${TEXT_XERO_NAVY}`

@@ -91,11 +91,11 @@ export default function Feedback({ question, previousScreen }) {
 
   function BadReasonOptions({ visible }) {
     const badReasonOptions = [
-      "Overcrowded atmosphere",
-      "Disliked food options provided",
-      "Not enough dietary catering",
-      "Music didn't match my vibe",
-      "Other",
+      "Crowded",
+      "Music",
+      "Low Energy",
+      "Dietary Options",
+      "Food",
     ];
 
     if (visible) {
@@ -109,8 +109,12 @@ export default function Feedback({ question, previousScreen }) {
     }
 
     function onClick(badReasonOption) {
-      clearTimeout(autoSubmit); // Cancel the no response submission
-      submitFeedback(question, "frown", badReasonOption, latitude, longitude);
+      clearTimeout(autoSubmit); // Cancel the 'other' response submission
+      if (!(badReasonOption == "Cancel")) {
+        submitFeedback(question, "frown", badReasonOption, latitude, longitude);
+      } else {
+        resetFeedback();
+      }
       setIsShowingBadReasonOptions(false);
     }
 
@@ -135,9 +139,9 @@ export default function Feedback({ question, previousScreen }) {
             className="text-white underline opacity-80"
             onClick={() => onClick("Cancel")}
           >
-            {badReasonOption}
-          </BadOptionButton>
-        ))}
+            Cancel
+          </div>
+        </div>
       </div>
     );
   }
@@ -184,7 +188,7 @@ export default function Feedback({ question, previousScreen }) {
             <div className="w-full bg-white rounded-3xl p-2 sm:p-8 flex flex-row space-x-4 relative">
               {smileys}
             </div>
-            <div className="h-16">
+            <div className="">
               <BadReasonOptions visible={isShowingBadReasonOptions} />
               <Thanks visible={isShowingThanks} />
             </div>
