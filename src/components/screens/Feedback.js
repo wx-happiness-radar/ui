@@ -230,7 +230,11 @@ function Smiley({ smileyName, onClick, currentlySelectedSmileyName }) {
 
 function Thanks({ visible }) {
   return (
-    <div className={`relative flex flex-row justify-center ${!visible && ""}`}>
+    <div
+      className={`relative flex flex-row justify-center ${
+        !visible && "hidden"
+      }`}
+    >
       <div className="bg-sky-300 bg-opacity-50 rounded-full px-3 py-1 flex items-center justify-center">
         <div className="text-2xl text-white flex-shrink">
           🎉 Thanks for your feedback! 🎉
