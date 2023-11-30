@@ -28,16 +28,14 @@ export function SecondaryButton({ children, onClick }) {
 export function BadOptionButton({ children, selectedBadReason, onClick }) {
   return (
     <div
-      className={`rounded-xl sm:rounded-3xl grow w-1/5  ${
+      className={`rounded-3xl w-full  ${
         selectedBadReason == children
           ? `${BG_XERO_NAVY} ${TEXT_WHITE}`
           : `bg-white ${TEXT_XERO_NAVY}`
       } flex items-center justify-center`}
       onClick={onClick}
     >
-      <div className="text-xs sm:text-xl text-center py-2 px-2 sm:py-4 sm:px-8">
-        {children}
-      </div>
+      <div className="text-xs text-center py-1 px-3">{children}</div>
     </div>
   );
 }
